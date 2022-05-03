@@ -1,0 +1,284 @@
+status:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: open
+  faker:
+    type: enum
+    values:
+    - open
+    - closed
+id:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: '420006107'
+  faker:
+    type: integer
+    unique: true
+    to_str: true
+survey_id:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: '400013568'
+  faker:
+    type: foreign
+    dataset: se_surveys_raw
+    field: id
+type:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: weblink
+  faker:
+    type: enum
+    values:
+    - weblink
+    - email
+name:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: Web Link 1
+  faker:
+    type: enum
+    values:
+    - Web Link 1
+    - Web Link 2
+    - Web Link 3
+    - Web Link 4
+thank_you_message:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: Thank you for completing our survey!
+  faker:
+    type: enum
+    values:
+    - Thank you for completing our survey!
+thank_you_page:
+  json_type: object
+  td_type: varchar
+  mandatory: true
+  pydantic_type: Dict
+  example:
+    is_enabled: false
+    message: Thank you for completing our survey!
+  faker:
+    type: enum
+    values:
+    - is_enabled: false
+      message: Thank you for completing our survey!
+    - is_enabled: true
+      message: Thank you for completing our survey!
+disqualification_type:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: message
+  faker:
+    type: enum
+    values:
+    - message
+    - email
+disqualification_message:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: Thank you for completing our survey!
+  faker:
+    type: enum
+    values:
+    - Thank you for completing our survey!
+disqualification_url:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: https://www.surveymonkey.com
+  faker:
+    type: sample
+    sample: urls
+closed_page_message:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: This survey is currently closed.  Please contact the author of this survey
+    for further assistance.
+  faker:
+    type: enum
+    values:
+    - This survey is currently closed
+redirect_type:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: url
+  faker:
+    type: enum
+    values:
+    - url
+    - close
+    - loop
+redirect_url:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: https://www.surveymonkey.com
+  faker:
+    type: sample
+    sample: urls
+display_survey_results:
+  json_type: boolean
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictBool
+  example: false
+  faker:
+    type: enum
+    values:
+    - false
+    - true
+edit_response_type:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: until_complete
+  faker:
+    type: enum
+    values:
+    - until_complete
+    - never
+    - always
+anonymous_type:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: not_anonymous
+  faker:
+    type: enum
+    values:
+    - not_anonymous
+allow_multiple_responses:
+  json_type: boolean
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictBool
+  example: false
+  faker:
+    type: enum
+    values:
+    - false
+    - true
+date_modified:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: '2022-03-18T10:52:00+00:00'
+  faker:
+    type: date
+    format: '%Y-%m-%dT%H:%M:%S'
+date_created:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: '2022-03-18T10:52:00+00:00'
+  faker:
+    type: date
+    format: '%Y-%m-%dT%H:%M:%S'
+response_count:
+  json_type: number
+  td_type: bigint
+  mandatory: true
+  pydantic_type: StrictInt
+  example: 0
+  faker:
+    type: enum
+    values:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 8
+    - 15
+    - 24
+    - 52
+    - 33
+    - 117
+    - 134
+    - 367
+password_enabled:
+  json_type: boolean
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictBool
+  example: false
+  faker:
+    type: enum
+    values:
+    - false
+response_limit:
+  json_type: number
+  td_type: varchar
+  mandatory: false
+  pydantic_type: Optional[StrictInt]
+  example: null
+  faker:
+    type: enum
+    values:
+    - null
+sender_email:
+  json_type: string
+  td_type: varchar
+  mandatory: false
+  pydantic_type: Optional[StrictStr]
+  example: null
+  faker:
+    type: enum
+    values:
+    - null
+close_date:
+  json_type: string
+  td_type: varchar
+  mandatory: false
+  pydantic_type: Optional[StrictStr]
+  example: null
+  faker:
+    type: enum
+    values:
+    - null
+url:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: https://www.surveymonkey.com/r/HJFLG7X
+  faker:
+    type: sample
+    sample: urls
+href:
+  json_type: string
+  td_type: varchar
+  mandatory: true
+  pydantic_type: StrictStr
+  example: https://api.surveymonkey.com/v3/collectors/420006107
+  faker:
+    type: sample
+    sample: urls
