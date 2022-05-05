@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/metadata-editor/static/css/main.073c9b0a.css",
+    "main.js": "/metadata-editor/static/js/main.750affe9.js",
+    "index.html": "/metadata-editor/index.html",
+    "main.073c9b0a.css.map": "/metadata-editor/static/css/main.073c9b0a.css.map",
+    "main.750affe9.js.map": "/metadata-editor/static/js/main.750affe9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.750affe9.js"
+  ]
+}
