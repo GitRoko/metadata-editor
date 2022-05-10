@@ -1,18 +1,16 @@
 import { useState } from 'react';
 import { types } from './types/types';
 
-export function SelectType() {
-  const [SelectedType, setSelectedType] = useState('');
-
-
-  const onUserType = (event) => {
-    setSelectedType(types[event.target.value]);
-  };
+export function SelectType({ typeValue }) {
+  const [SelectedType, setSelectedType] = useState(typeValue);
 
   return (
     <select
       className="types"
-      onChange={onUserType}
+      onChange={(e) => {
+        setSelectedType(e.target.value);
+      }}
+      defaultValue={SelectedType}
     >
       {Object.keys(types).map(key => (
         <option

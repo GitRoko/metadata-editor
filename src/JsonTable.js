@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { SelectType } from './SelectType';
+import { getTypes } from './types/getTypes';
 
 export function JsonTable({
   parseContent,
 }) {
   const [data, setData] = useState([]);
+  const [flatData, setFlatData] = useState([]);
+  const rowData = [];
 
   function getKeys(data) {
     return Object.keys(data);
@@ -14,62 +17,54 @@ export function JsonTable({
     setData(parseContent);
   }, [parseContent]);
 
-  function formatedData(obj, keys) {
-    return keys.map((key, i) => {
-      return (
-        <>
-          {(obj[key] != null && obj[key].constructor.name === "Object")
-            ? (
-              // <tr>
-              //   <table>
-              //     <tbody>
-              <>
-                <tr >
-                  <td
-                    className='p0'
-                  >
-                    {`${JSON.stringify(key)} : {`}
-                  </td>
-                  <td><SelectType /></td>
-                </tr>
-                {formatedData(obj[key], getKeys(obj[key]))}
-                <tr colspan="2">
-                  <td
-                    className='p0'
-                  >{'},'}</td>
-                </tr>
-              </>
-              //     </tbody>
-              //   </table>
-              // </tr>
-            ) : (
-              <tr>
-                <td
-                  className='p20'
-                >
-                  {`${JSON.stringify(key)} : ${JSON.stringify(obj[key])},`}
-                </td>
-                <td><SelectType /></td>
-              </tr>
-            )}
-        </>
-      );
-    })
-  };
+  useEffect(() => {
+    if (data) {
+      flatObject(data, getKeys(data));
+      setFlatData(rowData);
+    }
+  }, [data]);
+
+  function flatObject(object, keys) {
+
+    keys.forEach((key, i) => {
+      if (object[key] != null && object[key].constructor.name === "Object") {
+        rowData.push({ key, value: object[key], typeValue: getTypes(object[key]) });
+        flatObject(object[key], getKeys(object[key]));
+      } else {
+        rowData.push({ key, value: object[key], typeValue: getTypes(object[key]) });
+      }
+    });
+  }
+
 
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Json</th>
-            <th>Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          {(data) && formatedData(data, getKeys(data))}
-        </tbody>
-      </table>
+      {flatData.length !== 0 && (
+        <table>
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              flatData.map((item) => {
+                return (
+                  <tr>
+                    <td className='p20'>
+                      {/* {`${JSON.stringify(item.key)} : ${JSON.stringify(item.value)},`} */}
+                      {`${JSON.stringify(item.key)}`}
+                    </td>
+                    <td>
+                      <SelectType typeValue={item.typeValue} />
+                    </td>
+                  </tr>
+                )
+              })}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
