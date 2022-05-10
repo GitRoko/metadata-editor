@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { SelectType } from './SelectType';
+import { SelectType } from '../SelectType/SelectType';
 
 export function JsonTable({
   parseContent,
@@ -30,7 +30,7 @@ export function JsonTable({
                 return (
                   <tr>
                     <td className='p20'>
-                      {`${JSON.stringify(key)} : ${JSON.stringify(data[key].json_type)}`}
+                      {key}
                     </td>
                     <td>
                       <SelectType typeValue={data[key].json_type} />

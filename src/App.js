@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import YAML from 'yaml';
-import { JsonTable } from './JsonTable';
+import { JsonTable } from './JsonTable/JsonTable';
 
 function App() {
   const [textArea, setTextArea] = useState('');
