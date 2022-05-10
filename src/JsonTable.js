@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { SelectType } from './SelectType';
 
 export function JsonTable({
   parseContent,
@@ -19,25 +20,28 @@ export function JsonTable({
         <>
           {(obj[key] != null && obj[key].constructor.name === "Object")
             ? (
-              <tr>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td
-                        className='p0'
-                      >
-                        {`${JSON.stringify(key)} : {`}
-                      </td>
-                    </tr>
-                    {formatedData(obj[key], getKeys(obj[key]))}
-                    <tr>
-                      <td
-                        className='p0'
-                      >{'},'}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </tr>
+              // <tr>
+              //   <table>
+              //     <tbody>
+              <>
+                <tr >
+                  <td
+                    className='p0'
+                  >
+                    {`${JSON.stringify(key)} : {`}
+                  </td>
+                  <td><SelectType /></td>
+                </tr>
+                {formatedData(obj[key], getKeys(obj[key]))}
+                <tr colspan="2">
+                  <td
+                    className='p0'
+                  >{'},'}</td>
+                </tr>
+              </>
+              //     </tbody>
+              //   </table>
+              // </tr>
             ) : (
               <tr>
                 <td
@@ -45,6 +49,7 @@ export function JsonTable({
                 >
                   {`${JSON.stringify(key)} : ${JSON.stringify(obj[key])},`}
                 </td>
+                <td><SelectType /></td>
               </tr>
             )}
         </>
@@ -55,6 +60,12 @@ export function JsonTable({
   return (
     <div>
       <table>
+        <thead>
+          <tr>
+            <th>Json</th>
+            <th>Type</th>
+          </tr>
+        </thead>
         <tbody>
           {(data) && formatedData(data, getKeys(data))}
         </tbody>
@@ -62,3 +73,4 @@ export function JsonTable({
     </div>
   );
 }
+
