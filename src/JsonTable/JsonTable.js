@@ -2,21 +2,28 @@ import { useEffect, useState } from 'react';
 import { SelectType } from '../SelectType/SelectType';
 
 export function JsonTable({
-  parseContent,
+  parseLoadContent,
+  setSaveContent,
 }) {
-  const [data, setData] = useState([]);
+  const [jsonData, setJsonData] = useState([]);
 
   function getKeys(data) {
     return Object.keys(data);
   }
 
   useEffect(() => {
-    setData(parseContent);
-  }, [parseContent]);
+    setJsonData(parseLoadContent);
+  }, [parseLoadContent]);
 
+  useEffect(() => {
+    setSaveContent(jsonData);
+  }, [jsonData]);
+
+  
+  
   return (
     <div>
-      {data.length !== 0 && (
+      {jsonData.length !== 0 && (
         <table>
           <thead>
             <tr>
@@ -26,14 +33,18 @@ export function JsonTable({
           </thead>
           <tbody>
             {
-              getKeys(data).map((key) => {
+              getKeys(jsonData).map((key) => {
                 return (
-                  <tr>
+                  <tr key={key}>
                     <td className='p20'>
                       {key}
                     </td>
                     <td>
-                      <SelectType typeValue={data[key].json_type} />
+                      <SelectType
+                        value={{key: key, value: jsonData[key].json_type}}
+                        jsonData={jsonData}
+                        setJsonData={setJsonData}
+                      />
                     </td>
                   </tr>
                 )

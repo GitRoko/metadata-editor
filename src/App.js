@@ -5,18 +5,42 @@ import { JsonTable } from './JsonTable/JsonTable';
 
 function App() {
   const [textArea, setTextArea] = useState('');
-  const [parseContent, setParseContent] = useState('');
   const [loadContent, setLoadContent] = useState(null);
+  const [parseLoadContent, setLoadParseContent] = useState('');
+  const [saveContent, setSaveContent] = useState(null);
+  const [parseSaveContent, setParseSaveContent] = useState(null);
 
+  // Когда получили данные из файла парсим YAML => JSON
   useEffect(() => {
     if (loadContent) {
-      setParseContent(YAML.parse(loadContent));
+      setLoadParseContent(YAML.parse(loadContent));
     }
   }, [loadContent]);
 
+  // Выводим JSON в <textArea>
   useEffect(() => {
-    setTextArea(JSON.stringify(parseContent, null, 2))
-  }, [parseContent]);
+    setTextArea(JSON.stringify(parseLoadContent, null, 2))
+  }, [parseLoadContent]);
+
+  // Когда получаем изменения типа в JSON, парсим JSON => YAML
+  useEffect(() => {
+    if (saveContent) {
+
+      console.log('saveContent', saveContent);
+
+      const parseToYamlData = YAML.stringify(saveContent);
+      console.log('parseToYamlData', parseToYamlData);
+
+      setParseSaveContent(parseToYamlData);
+      console.log('parseSaveContent', parseSaveContent);
+      console.log('YAML.stringify(saveContent)', YAML.stringify(saveContent));
+
+
+    }
+  }, [saveContent]);
+
+
+  // console.log('YAML saveContent ', YAML.stringify(saveContent));
 
   const options = {
     types: [
@@ -30,14 +54,24 @@ function App() {
     excludeAcceptAllOption: true,
   };
 
-  const filePicker = async () => {
-    const [fileHandle] = await window.showOpenFilePicker(options)
+  // let fileHandle;
 
-    const file = await fileHandle.getFile()
-    const fileContent = await file.text()
+  const filePicker = async () => {
+    const [fileHandle] = await window.showOpenFilePicker(options);
+
+    const file = await fileHandle.getFile();
+    const fileContent = await file.text();
 
     setLoadContent(fileContent);
   }
+
+  const fileSaver = async () => {
+    const fileHandle = await window.showSaveFilePicker();
+    const writableStream = await fileHandle.createWritable();
+    await writableStream.write(parseSaveContent);
+    await writableStream.close();
+  }
+
 
   return (
     <div className="App">
@@ -47,6 +81,12 @@ function App() {
           onClick={filePicker}
         >
           Open file
+        </button>
+        <button
+          className="saveFile"
+          onClick={fileSaver}
+        >
+          Save file
         </button>
       </div>
       <textarea
@@ -63,7 +103,8 @@ function App() {
       </textarea>
 
       <JsonTable
-        parseContent={parseContent}
+        parseLoadContent={parseLoadContent}
+        setSaveContent={setSaveContent}
       />
 
     </div>

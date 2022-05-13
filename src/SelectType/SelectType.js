@@ -1,35 +1,76 @@
-// import { useState } from 'react';
-// import { types } from '../types/types';
-
-// export function SelectType({ typeValue }) {
-//   const [SelectedType, setSelectedType] = useState(typeValue);
-
-//   return (
-//     <select
-//       className="types"
-//       onChange={(e) => {
-//         setSelectedType(e.target.value);
-//       }}
-//       defaultValue={SelectedType}
-//     >
-//       {Object.keys(types).map(key => (
-//         <option
-//           value={key}
-//           key={key}
-//         >
-//           {`${types[key]} ${key}`}
-//         </option>
-//       ))}
-//     </select>
-//   );
-// }
-
 import React, { useState, useEffect } from 'react';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
+import _ from "lodash";
 
+export function SelectType({ value, jsonData, setJsonData }) {
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [typeValue, setTypeValue] = useState(value);
 
-export function SelectType({ typeValue }) {
-  const data = [
+  const { SingleValue, Option, } = components;
+  useEffect(() => {
+    setSelectedOption(optionsData.find((item) => item.value === typeValue.value));
+  }, [typeValue]);
+
+  const handleChange = e => {
+    setSelectedOption(e);
+
+    setTypeValue({ ...typeValue, value: e.value });
+
+    Object.keys(jsonData[typeValue.key]).forEach((key) => {
+      if (key === 'json_type') {
+        jsonData[typeValue.key][key] = e.value;
+      }
+    });
+
+    const newJsonData = _.cloneDeep(jsonData);
+    
+    setJsonData(newJsonData);
+  }
+
+  const ValueOption = (props) => (
+    <SingleValue {...props}>
+      <div style={{
+        width: '70px',
+      }}>
+
+      <span style={{
+        width: '25px',
+        padding: 3,
+        display: 'inline-block',
+        border: '1px solid',
+        backgroundColor: '#6495ED',
+        borderRadius: '10%',
+        textAlign: 'center',
+        fontSize: '14px',
+        color: '#FFF',
+      }}>{props.data.icon}</span>
+      </div>
+    </SingleValue>
+  );
+
+  const IconOption = (props) => (
+    <Option {...props}>
+      <div style={{
+        width: '100%',
+      }}>
+        <span style={{
+          width: '25px',
+          padding: 3,
+          display: 'inline-block',
+          border: '1px solid',
+          backgroundColor: '#6495ED',
+          borderRadius: '10%',
+          textAlign: 'center',
+          fontSize: '14px',
+          color: '#FFF',
+          marginRight: 10,
+        }}>{props.data.icon}</span>
+        <span>{props.data.text}</span>
+      </div>
+    </Option>
+  );
+
+  const optionsData = [
     {
       value: 'string',
       text: 'string',
@@ -57,41 +98,12 @@ export function SelectType({ typeValue }) {
     },
   ];
 
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  useEffect(() => {
-    setSelectedOption(data.find((item) => item.value === typeValue));
-  }, [typeValue]);
-
-  // handle onChange event of the dropdown
-  const handleChange = e => {
-    setSelectedOption(e);
-  }
-
   return (
-      <Select
-        // placeholder="Select Option"
-        defaultValue={data[0]}
-        value={selectedOption}
-        options={data}
-        onChange={handleChange}
-        getOptionLabel={e => (
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span style={{ 
-              width: '25px',
-              padding: 5,
-              display: 'inline-block',
-              border: '1px solid blue',
-              textAlign: 'center',
-              fontSize: '12px',
-              color: 'blue',
-
-            }}>{e.icon}</span>
-            <span style={{ marginLeft: 5 }}>{e.text}</span>
-          </div>
-        )}
-      />
+    <Select
+      value={selectedOption}
+      options={optionsData}
+      onChange={handleChange}
+      components={{ Option: IconOption, SingleValue: ValueOption }}
+    />
   );
 }
-
-// export default App;

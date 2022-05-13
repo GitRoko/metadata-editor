@@ -7,14 +7,14 @@ status:
   faker:
     type: enum
     values:
-    - open
-    - closed
+      - open
+      - closed
 id:
   json_type: string
   td_type: varchar
   mandatory: true
   pydantic_type: StrictStr
-  example: '420006107'
+  example: "420006107"
   faker:
     type: integer
     unique: true
@@ -24,7 +24,7 @@ survey_id:
   td_type: varchar
   mandatory: true
   pydantic_type: StrictStr
-  example: '400013568'
+  example: "400013568"
   faker:
     type: foreign
     dataset: se_surveys_raw
@@ -38,8 +38,8 @@ type:
   faker:
     type: enum
     values:
-    - weblink
-    - email
+      - weblink
+      - email
 name:
   json_type: string
   td_type: varchar
@@ -49,10 +49,10 @@ name:
   faker:
     type: enum
     values:
-    - Web Link 1
-    - Web Link 2
-    - Web Link 3
-    - Web Link 4
+      - Web Link 1
+      - Web Link 2
+      - Web Link 3
+      - Web Link 4
 thank_you_message:
   json_type: string
   td_type: varchar
@@ -62,7 +62,7 @@ thank_you_message:
   faker:
     type: enum
     values:
-    - Thank you for completing our survey!
+      - Thank you for completing our survey!
 thank_you_page:
   json_type: object
   td_type: varchar
@@ -74,10 +74,10 @@ thank_you_page:
   faker:
     type: enum
     values:
-    - is_enabled: false
-      message: Thank you for completing our survey!
-    - is_enabled: true
-      message: Thank you for completing our survey!
+      - is_enabled: false
+        message: Thank you for completing our survey!
+      - is_enabled: true
+        message: Thank you for completing our survey!
 disqualification_type:
   json_type: string
   td_type: varchar
@@ -87,8 +87,8 @@ disqualification_type:
   faker:
     type: enum
     values:
-    - message
-    - email
+      - message
+      - email
 disqualification_message:
   json_type: string
   td_type: varchar
@@ -98,7 +98,7 @@ disqualification_message:
   faker:
     type: enum
     values:
-    - Thank you for completing our survey!
+      - Thank you for completing our survey!
 disqualification_url:
   json_type: string
   td_type: varchar
@@ -113,12 +113,12 @@ closed_page_message:
   td_type: varchar
   mandatory: true
   pydantic_type: StrictStr
-  example: This survey is currently closed.  Please contact the author of this survey
-    for further assistance.
+  example: This survey is currently closed.  Please contact the author of this
+    survey for further assistance.
   faker:
     type: enum
     values:
-    - This survey is currently closed
+      - This survey is currently closed
 redirect_type:
   json_type: string
   td_type: varchar
@@ -128,9 +128,9 @@ redirect_type:
   faker:
     type: enum
     values:
-    - url
-    - close
-    - loop
+      - url
+      - close
+      - loop
 redirect_url:
   json_type: string
   td_type: varchar
@@ -149,8 +149,8 @@ display_survey_results:
   faker:
     type: enum
     values:
-    - false
-    - true
+      - false
+      - true
 edit_response_type:
   json_type: string
   td_type: varchar
@@ -160,9 +160,9 @@ edit_response_type:
   faker:
     type: enum
     values:
-    - until_complete
-    - never
-    - always
+      - until_complete
+      - never
+      - always
 anonymous_type:
   json_type: string
   td_type: varchar
@@ -172,7 +172,7 @@ anonymous_type:
   faker:
     type: enum
     values:
-    - not_anonymous
+      - not_anonymous
 allow_multiple_responses:
   json_type: boolean
   td_type: varchar
@@ -182,26 +182,26 @@ allow_multiple_responses:
   faker:
     type: enum
     values:
-    - false
-    - true
+      - false
+      - true
 date_modified:
   json_type: string
   td_type: varchar
   mandatory: true
   pydantic_type: StrictStr
-  example: '2022-03-18T10:52:00+00:00'
+  example: 2022-03-18T10:52:00+00:00
   faker:
     type: date
-    format: '%Y-%m-%dT%H:%M:%S'
+    format: "%Y-%m-%dT%H:%M:%S"
 date_created:
   json_type: string
   td_type: varchar
   mandatory: true
   pydantic_type: StrictStr
-  example: '2022-03-18T10:52:00+00:00'
+  example: 2022-03-18T10:52:00+00:00
   faker:
     type: date
-    format: '%Y-%m-%dT%H:%M:%S'
+    format: "%Y-%m-%dT%H:%M:%S"
 response_count:
   json_type: number
   td_type: bigint
@@ -211,19 +211,19 @@ response_count:
   faker:
     type: enum
     values:
-    - 0
-    - 1
-    - 2
-    - 3
-    - 4
-    - 8
-    - 15
-    - 24
-    - 52
-    - 33
-    - 117
-    - 134
-    - 367
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 8
+      - 15
+      - 24
+      - 52
+      - 33
+      - 117
+      - 134
+      - 367
 password_enabled:
   json_type: boolean
   td_type: varchar
@@ -233,7 +233,7 @@ password_enabled:
   faker:
     type: enum
     values:
-    - false
+      - false
 response_limit:
   json_type: number
   td_type: varchar
@@ -243,7 +243,7 @@ response_limit:
   faker:
     type: enum
     values:
-    - null
+      - null
 sender_email:
   json_type: string
   td_type: varchar
@@ -253,7 +253,7 @@ sender_email:
   faker:
     type: enum
     values:
-    - null
+      - null
 close_date:
   json_type: string
   td_type: varchar
@@ -263,7 +263,7 @@ close_date:
   faker:
     type: enum
     values:
-    - null
+      - null
 url:
   json_type: string
   td_type: varchar
