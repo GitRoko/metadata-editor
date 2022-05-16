@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { CheckBox } from '../CheckBox/CheckBox';
 import { InputText } from '../InputText/InputText';
-import { SelectType } from '../SelectType/SelectType';
+import { JsonTypeSelect } from '../SelectType/JsonTypeSelect';
+import { TdTypeSelect } from '../SelectType/TdTypeSelect';
+import { json_typeMapping, pydantic_typeMapping, td_typeMapping } from '../types/types';
 
 export function JsonTable({
   parseLoadContent,
@@ -32,6 +34,7 @@ export function JsonTable({
               <th>Field</th>
               <th>Type</th>
               <th>Required</th>
+              <th>TreasureData type</th>
               <th>Example</th>
             </tr>
           </thead>
@@ -44,10 +47,11 @@ export function JsonTable({
                       {key}
                     </td>
                     <td>
-                      <SelectType
+                      <JsonTypeSelect
                         value={{ key: key, value: jsonData[key].json_type }}
                         jsonData={jsonData}
                         setJsonData={setJsonData}
+                        typeMapping={json_typeMapping}
                       />
                     </td>
                     <td>
@@ -56,6 +60,15 @@ export function JsonTable({
                         isChecked={jsonData[key].mandatory}
                         jsonData={jsonData}
                         setJsonData={setJsonData}
+                      />
+                    </td>
+                    <td>
+                      <TdTypeSelect
+                        jsonDataKey={key}
+                        value={{ key: key, generalType: jsonData[key].json_type, value: jsonData[key].td_type}}
+                        jsonData={jsonData}
+                        setJsonData={setJsonData}
+                        typeMapping={td_typeMapping}
                       />
                     </td>
                     <td>

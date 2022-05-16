@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import Select, { components } from 'react-select';
 import { cloneDeep } from 'lodash';
 
-export function SelectType({ value, jsonData, setJsonData }) {
+export function JsonTypeSelect({ value, jsonData, setJsonData, typeMapping }) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [typeValue, setTypeValue] = useState(value);
 
   const { SingleValue, Option, } = components;
+
+  // console.log('json_typeMapping - ', typeMapping);
   
   useEffect(() => {
     setSelectedOption(optionsData.find((item) => item.value === typeValue.value));
+    // console.log('typeValue - ', typeValue);
   }, [typeValue]);
 
   const handleChange = e => {
