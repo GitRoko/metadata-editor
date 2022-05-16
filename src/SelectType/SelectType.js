@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Select, { components } from 'react-select';
-import _ from "lodash";
+import { cloneDeep } from 'lodash';
 
 export function SelectType({ value, jsonData, setJsonData }) {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -22,7 +22,7 @@ export function SelectType({ value, jsonData, setJsonData }) {
       }
     });
 
-    const newJsonData = _.cloneDeep(jsonData);
+    const newJsonData = cloneDeep(jsonData);
     
     setJsonData(newJsonData);
   }

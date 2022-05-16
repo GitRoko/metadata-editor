@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { CheckBox } from '../CheckBox/CheckBox';
+import { InputText } from '../InputText/InputText';
 import { SelectType } from '../SelectType/SelectType';
 
 export function JsonTable({
@@ -27,8 +29,10 @@ export function JsonTable({
         <table>
           <thead>
             <tr>
-              <th>Key</th>
+              <th>Field</th>
               <th>Type</th>
+              <th>Required</th>
+              <th>Example</th>
             </tr>
           </thead>
           <tbody>
@@ -45,6 +49,12 @@ export function JsonTable({
                         jsonData={jsonData}
                         setJsonData={setJsonData}
                       />
+                    </td>
+                    <td>
+                      <CheckBox isChecked={jsonData[key].mandatory} />
+                    </td>
+                    <td>
+                      <InputText exampleText={JSON.stringify(jsonData[key].example)} />
                     </td>
                   </tr>
                 )

@@ -39,9 +39,6 @@ function App() {
     }
   }, [saveContent]);
 
-
-  // console.log('YAML saveContent ', YAML.stringify(saveContent));
-
   const options = {
     types: [
       {
@@ -54,11 +51,8 @@ function App() {
     excludeAcceptAllOption: true,
   };
 
-  // let fileHandle;
-
   const filePicker = async () => {
     const [fileHandle] = await window.showOpenFilePicker(options);
-
     const file = await fileHandle.getFile();
     const fileContent = await file.text();
 
@@ -71,7 +65,6 @@ function App() {
     await writableStream.write(parseSaveContent);
     await writableStream.close();
   }
-
 
   return (
     <div className="App">
