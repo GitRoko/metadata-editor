@@ -238,7 +238,7 @@ response_limit:
   json_type: number
   td_type: bigint
   mandatory: false
-  pydantic_type: Optional[StrictInt]
+  pydantic_type: StrictInt
   example: null
   faker:
     type: enum
@@ -246,7 +246,7 @@ response_limit:
       - null
 sender_email:
   json_type: string
-  td_type: varchar
+  td_type: StrictStr
   mandatory: false
   pydantic_type: Optional[StrictStr]
   example: null
@@ -256,7 +256,7 @@ sender_email:
       - null
 close_date:
   json_type: string
-  td_type: varchar
+  td_type: StrictStr
   mandatory: false
   pydantic_type: Optional[StrictStr]
   example: null

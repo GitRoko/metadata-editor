@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Select, { components } from 'react-select';
 import { cloneDeep } from 'lodash';
 
-export function TdTypeSelect({ value, jsonData, setJsonData, jsonDataKey }) {
+export function PydanticTypeSelect({ value, jsonData, setJsonData, jsonDataKey }) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [typeValue, setTypeValue] = useState(value);
   const [optionsData, setOptionsData] = useState([]);
@@ -14,52 +14,46 @@ export function TdTypeSelect({ value, jsonData, setJsonData, jsonDataKey }) {
       case 'string':
         return [{
           generalType: 'string',
-          value: 'varchar',
-          text: 'varchar',
+          value: 'StrictStr',
+          text: 'StrictStr',
           icon: 'abc',
         }];
 
       case 'number':
         return [{
           generalType: 'number',
-          value: 'bigint',
-          text: 'bigint',
+          value: 'StrictInt',
+          text: 'StrictInt',
           icon: '123',
         },
         {
           generalType: 'number',
-          value: 'double',
-          text: 'double',
+          value: 'StrictFloat',
+          text: 'StrictFloat',
           icon: '1.01',
         }];
 
       case 'array':
         return [{
           generalType: 'array',
-          value: 'string',
-          text: 'string',
-          icon: '[ ]',
-        },
-        {
-          generalType: 'array',
-          value: 'array(varchar)',
-          text: 'array(varchar)',
+          value: 'List',
+          text: 'List',
           icon: '[ ]',
         }];
 
       case 'object':
         return [{
           generalType: 'object',
-          value: 'varchar',
-          text: 'varchar',
+          value: 'Dict',
+          text: 'Dict',
           icon: '{ }',
         }];
 
       case 'boolean':
         return [{
           generalType: 'boolean',
-          value: 'varchar',
-          text: 'varchar',
+          value: 'StrictBool',
+          text: 'StrictBool',
           icon: '0/1',
         }];
 
@@ -81,7 +75,7 @@ export function TdTypeSelect({ value, jsonData, setJsonData, jsonDataKey }) {
     setTypeValue({ ...typeValue, value: e.value });
 
     Object.keys(jsonData[jsonDataKey]).forEach((key) => {
-      if (key === 'td_type') {
+      if (key === 'pydantic_type') {
         jsonData[jsonDataKey][key] = e.value;
       }
     });
@@ -94,7 +88,7 @@ export function TdTypeSelect({ value, jsonData, setJsonData, jsonDataKey }) {
   const ValueOption = (props) => (
     <SingleValue {...props}>
       <div style={{
-        width: '110px',
+        width: '80px',
       }}>
 
         <span style={{
