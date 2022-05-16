@@ -59,7 +59,12 @@ export function JsonTable({
                       />
                     </td>
                     <td>
-                      <InputText exampleData={JSON.stringify(jsonData[key].example)} />
+                      <InputText
+                        jsonDataKey={key}
+                        exampleData={JSON.stringify(jsonData[key].example)}
+                        jsonData={jsonData}
+                        setJsonData={setJsonData}
+                      />
                     </td>
                   </tr>
                 )

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { cloneDeep } from 'lodash';
 
 export function CheckBox({ jsonDataKey, isChecked, jsonData, setJsonData }) {
-  const [checked, setChecked] = useState(null);
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     if (isChecked) {
@@ -12,7 +12,6 @@ export function CheckBox({ jsonDataKey, isChecked, jsonData, setJsonData }) {
 
   function handleCheckboxChange() {
     setChecked(!checked);
-    console.log('key -', jsonDataKey)
 
     Object.keys(jsonData[jsonDataKey]).forEach((item) => {
       if (item === 'mandatory') {
@@ -31,6 +30,7 @@ export function CheckBox({ jsonDataKey, isChecked, jsonData, setJsonData }) {
       <input
         name="mandatoryType"
         type="checkbox"
+        value='mandatory'
         checked={checked}
         onChange={handleCheckboxChange}
       />
