@@ -7,6 +7,7 @@ export function SelectType({ value, jsonData, setJsonData }) {
   const [typeValue, setTypeValue] = useState(value);
 
   const { SingleValue, Option, } = components;
+  
   useEffect(() => {
     setSelectedOption(optionsData.find((item) => item.value === typeValue.value));
   }, [typeValue]);

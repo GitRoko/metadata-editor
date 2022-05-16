@@ -25,17 +25,15 @@ function App() {
   // Когда получаем изменения типа в JSON, парсим JSON => YAML
   useEffect(() => {
     if (saveContent) {
-
-      console.log('saveContent', saveContent);
-
+      // console.log('saveContent', saveContent);
       const parseToYamlData = YAML.stringify(saveContent);
-      console.log('parseToYamlData', parseToYamlData);
+      // console.log('parseToYamlData', parseToYamlData);
 
       setParseSaveContent(parseToYamlData);
-      console.log('parseSaveContent', parseSaveContent);
-      console.log('YAML.stringify(saveContent)', YAML.stringify(saveContent));
+      // console.log('parseSaveContent', parseSaveContent);
+      // console.log('YAML.stringify(saveContent)', YAML.stringify(saveContent));
 
-
+      setTextArea(JSON.stringify(saveContent, null, 2));
     }
   }, [saveContent]);
 

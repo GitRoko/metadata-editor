@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
-export function InputText({ exampleText }) {
+export function InputText({ exampleText: exampleData }) {
   const [text, setText] = useState('');
 
   useEffect(() => {
-    if (exampleText) {
-      setText(exampleText)
+    if (exampleData) {
+      setText(exampleData)
     }
-  }, [exampleText]);
+  }, [exampleData]);
 
   function handleTextChange(event) {
     setText(event.target.value);

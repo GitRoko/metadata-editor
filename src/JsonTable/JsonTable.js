@@ -21,8 +21,8 @@ export function JsonTable({
     setSaveContent(jsonData);
   }, [jsonData]);
 
-  
-  
+
+
   return (
     <div>
       {jsonData.length !== 0 && (
@@ -45,16 +45,21 @@ export function JsonTable({
                     </td>
                     <td>
                       <SelectType
-                        value={{key: key, value: jsonData[key].json_type}}
+                        value={{ key: key, value: jsonData[key].json_type }}
                         jsonData={jsonData}
                         setJsonData={setJsonData}
                       />
                     </td>
                     <td>
-                      <CheckBox isChecked={jsonData[key].mandatory} />
+                      <CheckBox
+                        jsonDataKey={key}
+                        isChecked={jsonData[key].mandatory}
+                        jsonData={jsonData}
+                        setJsonData={setJsonData}
+                      />
                     </td>
                     <td>
-                      <InputText exampleText={JSON.stringify(jsonData[key].example)} />
+                      <InputText exampleData={JSON.stringify(jsonData[key].example)} />
                     </td>
                   </tr>
                 )
