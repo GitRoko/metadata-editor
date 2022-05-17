@@ -25,8 +25,12 @@ export function CheckBox({ jsonDataKey, isChecked, jsonData, setJsonData }) {
   }
 
   return (
-    <label>
-      Required:
+    <label
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+    }}
+    >
       <input
         name="mandatoryType"
         type="checkbox"

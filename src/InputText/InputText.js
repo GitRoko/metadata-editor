@@ -6,13 +6,13 @@ export function InputText({ exampleData, jsonDataKey, jsonData, setJsonData }) {
   const [text, setText] = useState('');
 
   useEffect(() => {
-    if (exampleData) {
-      setText(exampleData)
-    }
+
+        setText(exampleData);
+
   }, [exampleData]);
 
   function handleTextChange(event) {
-    setText(event.target.value);
+    setText(JSON.parse(event.target.value));
 
     Object.keys(jsonData[jsonDataKey]).forEach((item) => {
       if (item === 'example') {
@@ -21,7 +21,7 @@ export function InputText({ exampleData, jsonDataKey, jsonData, setJsonData }) {
     });
 
     const newJsonData = cloneDeep(jsonData);
-    
+
     setJsonData(newJsonData);
   }
 
