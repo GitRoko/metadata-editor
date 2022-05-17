@@ -2,8 +2,22 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import YAML from 'yaml';
 import { JsonTable } from './JsonTable/JsonTable';
+import { NewJsonTable } from './NewJsonTable/NewJsonTable';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+// import Typography from '@mui/material/Typography';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Fab from '@mui/material/Fab';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { ScrollTop } from './ScrollTop/ScrollTop';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Button from '@mui/material/Button';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
-function App() {
+function App(props) {
+
   const [textArea, setTextArea] = useState('');
   const [loadContent, setLoadContent] = useState(null);
   const [parseLoadContent, setLoadParseContent] = useState('');
@@ -66,42 +80,64 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <button
-          className="openFile"
-          onClick={filePicker}
-        >
-          Open file
-        </button>
-        <button
-          className="saveFile"
-          onClick={fileSaver}
-        >
-          Save file
-        </button>
-      </div>
-      <textarea
-        name="text"
-        className="fileTextArea"
-        value={textArea}
-        readOnly
-        onChange={(event) => {
-          setTextArea(event.target.value);
-        }}
-        cols="30"
-        rows="10"
-      >
-      </textarea>
+      <>
+        <CssBaseline />
+        <AppBar>
+          <Toolbar>
+            <ButtonGroup variant="contained" aria-label="outlined button group">
+              <Button
+                //variant="outlined"
+                onClick={filePicker}
+              >
+                Open file
+              </Button>
+              <Button
+                // variant="text"
+                onClick={fileSaver}
+              >
+                Save file
+              </Button>
+            </ButtonGroup>
+          </Toolbar>
+        </AppBar>
+        <Toolbar id="back-to-top-anchor" />
+        <Container>
+          <Box sx={{ my: 2 }}>
+            <>
+              <TextareaAutosize
+                maxRows={10}
+                aria-label="maximum height"
+                placeholder=""
+                value={textArea}
+                readOnly
+                onChange={(event) => {
+                  setTextArea(event.target.value);
+                }}
 
-      <JsonTable
-        parseLoadContent={parseLoadContent}
-        setSaveContent={setSaveContent}
-      />
+                style={{ width: '100%' }}
+              />
 
+              <NewJsonTable
+                parseLoadContent={parseLoadContent}
+                setSaveContent={setSaveContent}
+              />
+
+              {/* <JsonTable
+                parseLoadContent={parseLoadContent}
+                setSaveContent={setSaveContent}
+              /> */}
+            </>
+
+          </Box>
+        </Container>
+        <ScrollTop {...props}>
+          <Fab color="secondary" size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollTop>
+      </>
     </div>
   );
 }
 
 export default App;
-
-
