@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/metadata-editor/static/css/main.dee595c1.css",
-    "main.js": "/metadata-editor/static/js/main.b21956ad.js",
+    "main.js": "/metadata-editor/static/js/main.0184b532.js",
     "index.html": "/metadata-editor/index.html",
     "main.dee595c1.css.map": "/metadata-editor/static/css/main.dee595c1.css.map",
-    "main.b21956ad.js.map": "/metadata-editor/static/js/main.b21956ad.js.map"
+    "main.0184b532.js.map": "/metadata-editor/static/js/main.0184b532.js.map"
   },
   "entrypoints": [
     "static/css/main.dee595c1.css",
-    "static/js/main.b21956ad.js"
+    "static/js/main.0184b532.js"
   ]
 }
