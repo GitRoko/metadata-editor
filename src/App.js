@@ -82,32 +82,37 @@ function App(props) {
     <div className="App">
       <>
         <CssBaseline />
-        <AppBar>
-          <Toolbar>
-            <ButtonGroup variant="contained" aria-label="outlined button group">
-              <Button
-                //variant="outlined"
-                onClick={filePicker}
-              >
-                Open file
-              </Button>
-              <Button
-                // variant="text"
-                onClick={fileSaver}
-              >
-                Save file
-              </Button>
-            </ButtonGroup>
-          </Toolbar>
-        </AppBar>
+
+        <Container>
+          <AppBar>
+            <Toolbar>
+              <ButtonGroup variant="contained" aria-label="outlined button group">
+                <Button
+                  //variant="outlined"
+                  onClick={filePicker}
+                >
+                  Open file
+                </Button>
+                <Button
+                  // variant="text"
+                  onClick={fileSaver}
+                >
+                  Save file
+                </Button>
+              </ButtonGroup>
+            </Toolbar>
+          </AppBar>
+        </Container>
+
         <Toolbar id="back-to-top-anchor" />
+
         <Container>
           <Box sx={{ my: 2 }}>
             <>
               <TextareaAutosize
                 maxRows={10}
                 aria-label="maximum height"
-                placeholder=""
+                placeholder="Load file"
                 value={textArea}
                 readOnly
                 onChange={(event) => {
@@ -127,14 +132,15 @@ function App(props) {
                 setSaveContent={setSaveContent}
               /> */}
             </>
-
           </Box>
         </Container>
+
         <ScrollTop {...props}>
-          <Fab color="secondary" size="small" aria-label="scroll back to top">
+          <Fab color="primary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
           </Fab>
         </ScrollTop>
+
       </>
     </div>
   );
