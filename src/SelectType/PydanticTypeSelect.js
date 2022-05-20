@@ -90,7 +90,6 @@ export function PydanticTypeSelect({ value, jsonData, setJsonData, jsonDataKey }
       <div style={{
         width: '80px',
       }}>
-
         <span style={{
           width: '25px',
           padding: 3,

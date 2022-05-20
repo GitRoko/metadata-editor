@@ -7,19 +7,21 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
+import { cloneDeep } from 'lodash';
 
-const ITEM_HEIGHT = 42;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 160
-    }
-  }
-};
 
-const Json_type = [
+// const ITEM_HEIGHT = 42;
+// const ITEM_PADDING_TOP = 8;
+// const MenuProps = {
+//   PaperProps: {
+//     style: {
+//       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+//       width: 160
+//     }
+//   }
+// };
+
+const Json_types = [
   {
     value: "string",
     text: "string",
@@ -56,34 +58,49 @@ const Json_type = [
 //   };
 // }
 
-export function NewJsonTypeSelect() {
-  const [jsonType, setJsonType] = useState(['string']);
+export function NewJsonTypeSelect({ json_type, fieldData, setFieldData }) {
+  const [jsonType, setJsonType] = useState([json_type]);
 
   const handleChange = (event) => {
     const {
       target: { value }
     } = event;
+    // console.log('handleChange value - ', value);
     setJsonType(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+    // console.log('setJsonType jsonType - ', jsonType);
+
+
+    Object.keys(fieldData).forEach((item) => {
+      if (fieldData[item] === json_type) {
+        fieldData[item] = event.target.value;
+      }
+    })
+
+    let newFieldData = cloneDeep(fieldData);
+
+    setFieldData(newFieldData);
   };
 
   return (
     <div>
-      <FormControl sx={{ m: 0, width: 100 }} size="small" variant="standard" >
-        <InputLabel id="demo-multiple-chip-label">Json_type</InputLabel>
+      <FormControl sx={{ m: 0, width: 100 }} size="small" variant="outlined" >
+        <InputLabel id="demo-multiple-chip-label">Type</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           // multiple
           value={jsonType}
           onChange={handleChange}
-          // input={<OutlinedInput id="select-multiple-chip" label="Json_type" />}
+          input={<OutlinedInput id="select-multiple-chip" label="Type" />}
           renderValue={(selected) => {
-            let selectedTypeObject = Json_type.find((item => item.value === selected[0]));
+            // console.log('renderValue selected - ', selected);
+            // console.log('selected === jsonType - ', selected === jsonType);
+            let selectedTypeObject = Json_types.find((item => item.value === selected[0]));
 
-            console.log(selected, selectedTypeObject, Json_type);
+            // console.log(selected, selectedTypeObject, Json_type);
 
             return (
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0 }}>
@@ -93,7 +110,7 @@ export function NewJsonTypeSelect() {
           }}
           // MenuProps={MenuProps}
         >
-          {Json_type.map((item) => (
+          {Json_types.map((item) => (
             <MenuItem
               key={item.value}
               value={item.value}

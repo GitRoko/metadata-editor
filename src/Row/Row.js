@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { JsonTextField } from '../JsonTextField/JsonTextField';
+import { ExampleTextField } from '../ExampleTextField/ExampleTextField';
 import { NewJsonTypeSelect } from '../SelectType/NewJsonTypeSelect';
+import { NewTdTypeSelect } from '../SelectType/NewTdTypeSelect';
+import { NewPydanticTypeSelect } from '../SelectType/NewPydanticTypeSelect';
+import { RequiredCheckbox } from '../RequiredCheckbox/RequiredCheckbox';
 
 
 import Box from '@mui/material/Box';
@@ -12,21 +16,18 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-// import TableContainer from '@mui/material/TableContainer';
-// import TableHead from '@mui/material/TableHead';
-// import Typography from '@mui/material/Typography';
-// import Paper from '@mui/material/Paper';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+
 
 export function Row({ row }) {
-  // console.log('row - ', row);
   const [fieldData, setFieldData] = useState(row);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setFieldData(row);
   }, [row]);
+  useEffect(() => {
+    console.log(fieldData);
+  }, [fieldData]);
 
   return (
     <>
@@ -42,19 +43,25 @@ export function Row({ row }) {
               />
 
             </TableCell>
-            <TableCell align="left" size="small">
-              {/* {'json_type : '}
-              {fieldData.json_type} */}
+            <TableCell align="left" size="small" width="10%">
 
-              <NewJsonTypeSelect />
+              <NewJsonTypeSelect
+                json_type={fieldData.json_type}
+                fieldData={fieldData}
+                setFieldData={setFieldData}
+              />
 
             </TableCell>
-            <TableCell align="right">
-            <FormControlLabel control={<Checkbox defaultChecked />} label="Required" />
-              {/* {'required : '}
-              {`${fieldData.mandatory}`} */}
+            <TableCell align="right" width="40%">
+
+              <RequiredCheckbox
+                ischecked={fieldData.mandatory}
+                fieldData={fieldData}
+                setFieldData={setFieldData}
+              />
+
             </TableCell>
-            <TableCell align="right" size="small">
+            <TableCell align="right" size="small" width="5%">
               <IconButton
                 aria-label="expand row"
                 size="small"
@@ -75,19 +82,36 @@ export function Row({ row }) {
                     <TableBody>
                       <TableRow>
 
-                        <TableCell component="th" scope="row">
-                          {'td_type : '}
-                          {`${fieldData.td_type}`}
+                        <TableCell component="th" scope="row" align="center">
+                          {/* {'td_type : '}
+                          {`${fieldData.td_type}`} */}
+                          <NewTdTypeSelect
+                            td_type={fieldData.td_type}
+                            json_type={fieldData.json_type}
+                            fieldData={fieldData}
+                            setFieldData={setFieldData}
+                          />
                         </TableCell>
 
-                        <TableCell>
-                          {'pydantic_type : '}
-                          {`${fieldData.pydantic_type}`}
+                        <TableCell align="center">
+                          {/* {'pydantic_type : '}
+                          {`${fieldData.pydantic_type}`} */}
+                          <NewPydanticTypeSelect
+                            pydantic_type={fieldData.pydantic_type}
+                            json_type={fieldData.json_type}
+                            fieldData={fieldData}
+                            setFieldData={setFieldData}
+                          />
                         </TableCell>
 
-                        <TableCell align="right">
-                          {'example : '}
-                          {`${fieldData.example}`}
+                        <TableCell align="center">
+                          {/* {'example : '}
+                          {`${fieldData.example}`} */}
+                          <ExampleTextField
+                            example={fieldData.example}
+                            fieldData={fieldData}
+                            setFieldData={setFieldData}
+                          />
                         </TableCell>
 
                       </TableRow>

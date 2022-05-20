@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Row } from '../Row/Row';
-import { CheckBox } from '../CheckBox/CheckBox';
+// import { CheckBox } from '../CheckBox/CheckBox';
 import { InputText } from '../InputText/InputText';
 import { JsonTypeSelect } from '../SelectType/JsonTypeSelect';
 import { TdTypeSelect } from '../SelectType/TdTypeSelect';

@@ -19,7 +19,7 @@ export function JsonTextField({ jsonField, setFieldData, fieldData }) {
         fieldData[item] = event.target.value;
       }
     })
-    
+
     let newFieldData = cloneDeep(fieldData);
 
     setFieldData(newFieldData);
@@ -27,7 +27,9 @@ export function JsonTextField({ jsonField, setFieldData, fieldData }) {
 
   return (
     <TextField
-      variant="standard"
+      fullWidth
+      size="small"
+      variant="outlined"
       id="outlined-name"
       label="Field"
       value={text}
